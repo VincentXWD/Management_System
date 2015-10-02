@@ -1,0 +1,6 @@
+﻿  employee.cpp
+  main.cpp
+main.cpp(27): warning C4101: “sign”: 未引用的局部变量
+  正在生成代码
+  已完成代码的生成
+  Management_System.vcxproj -> C:\Users\Kazakiri\Desktop\cppexer\Management_System\Management_System\Release\Management_System.exe

@@ -61,6 +61,7 @@ public:
 	Salesman(string name, string number) : employee(name, number) {}
 	void showsalary();	//显示薪水
 	void input(string, string, double);	//录入信息
+	friend void removesam();	//使之可以更新static量
 	Salesman operator = (const Salesman&);
 
 protected:

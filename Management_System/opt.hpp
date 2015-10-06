@@ -233,6 +233,7 @@ void removesam() {
 	cin >> num;
 	for (int i = 0; i != salesman.size(); i++) {
 		if (salesman[i].shownum() == num) {
+			Salesman::subsold -= salesman[i].sold;
 			salesman.remove(i);
 			del_flag = 1;
 			break;

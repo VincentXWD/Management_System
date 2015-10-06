@@ -62,7 +62,7 @@ double Salesman::subsold = 0;
 void Salesman::showsalary() {
 	salary = sold * ratio;
 	cout << "编号：" << number.c_str() << " 姓名：" << name.c_str() << " 职称：兼职推销员" 
-		<< "月销售额：" << sold << "元 月薪：" << salary << "元" << endl;
+		<< "月销售额：" << sold << " 月薪：" << salary << "元" << endl;
 }
 
 void Salesman::input(string name, string number, double sold) {
@@ -87,7 +87,7 @@ Salesman Salesman::operator = (const Salesman& s) {
 void Salesmanager::showsalary() {
 	salary = subsold * ratio + monthpay;
 	cout << "编号：" << number.c_str() << " 姓名：" << name.c_str() << " 职称：销售经理" 
-		<< " 销售部门总月销售额：" << subsold << "元 月薪：" << salary << "元" << endl;
+		<< " 销售部门总月销售额：" << subsold << " 月薪：" << salary << "元" << endl;
 }
 
 void Salesmanager::input(string name, string number) {

@@ -31,7 +31,6 @@ namespace kirai {
         int size() const;
         type front() const;
         type back() const;
-        // to do
         bool insert(type, int);
         bool remove(int);
         type data(int);
@@ -51,7 +50,10 @@ namespace kirai {
     //operator overload
     template <class type>
     type &list<type>::operator[] (const int &num) const {
-        np cur = head;
+		if (num >= _size || num < 0) {
+			exit(EXIT_FAILURE);
+		}
+		np cur = head;
         for (int i = 0; i < num; i++) {
             cur = cur->next;
         }
@@ -92,7 +94,7 @@ namespace kirai {
 
     template <class type>
     bool list<type>::push_back(type val) {
-        if (_size == 0) {
+        if (empty()) {
             _init(val);
             return true;
         }
@@ -104,6 +106,7 @@ namespace kirai {
         tmp->pre = tail;
         tail->next = tmp;
         tail = tmp;
+		tail->next = NULL;
         _size++;
         return true;
     }
@@ -130,10 +133,9 @@ namespace kirai {
         if (empty()) {
             exit(EXIT_FAILURE);
         }
-        np cur = tail;
-        type tmp = cur->_data;
+        type tmp = tail->_data;
         tail = tail->pre;
-        delete cur;
+        delete tail->next;
         _size--;
         return tmp;
     }
@@ -143,13 +145,11 @@ namespace kirai {
         if (empty()) {
             exit(EXIT_FAILURE);
         }
-        np cur = head;
-        type tmp = cur->_data;
+        type tmp = head->_data;
         head = head->next;
-        delete cur;
-        _size--;
-        cur = head;
-        return tmp;
+		delete head->pre;
+		_size--;
+		return tmp;
     }
 
     template <class type>
@@ -178,12 +178,12 @@ namespace kirai {
             cur = cur->next;
         }
         np tmp = new nt;
-        cur = cur->pre;
-        tmp->next = cur->next;
-        cur->next->pre = tmp;
         tmp->pre = cur;
-        cur->next = tmp;
+		tmp->next = cur->next;
         tmp->_data = val;
+
+		cur->next->pre = tmp;
+		cur->next = tmp;
         _size++;
         return true;
     }
@@ -194,20 +194,23 @@ namespace kirai {
         if (pos >= _size || pos < 0) {
             return false;
         }
+        if(_size == 1) {
+            clear();
+            return true;
+        }
         if(pos == 0) {
-            pop_front();
+			pop_front();
             return true;
         }
         if(pos == _size - 1) {
-            pop_back();
+			pop_back();
             return true;
         }
-        for (int i = 0; i != pos+1; i++) {
+        for (int i = 0; i != pos; i++) {
             cur = cur->next;
         }
         cur->pre->next = cur->next;
         cur->next->pre = cur->pre;
-        tail = cur->next;
         cur->pre = NULL;
         cur->next = NULL;
         delete cur;

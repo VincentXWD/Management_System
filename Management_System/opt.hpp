@@ -173,8 +173,7 @@ void removemng() {
 	cin >> num;
 	for (int i = 0; i != manager.size(); i++) {
 		if (manager[i].shownum() == num) {
-			manager.remove(i);
-			del_flag = 1;
+			del_flag = manager.remove(i);
 			break;
 		}
 	}
@@ -193,8 +192,7 @@ void removetch() {
 	cin >> num;
 	for (int i = 0; i != technician.size(); i++) {
 		if (technician[i].shownum() == num) {
-			technician.remove(i);
-			del_flag = 1;
+			del_flag = technician.remove(i);
 			break;
 		}
 	}
@@ -213,8 +211,7 @@ void removesmg() {
 	cin >> num;
 	for (int i = 0; i != salesmanager.size(); i++) {
 		if (salesmanager[i].shownum() == num) {
-			salesmanager.remove(i);
-			del_flag = 1;
+			del_flag = salesmanager.remove(i);
 			break;
 		}
 	}
@@ -234,8 +231,7 @@ void removesam() {
 	for (int i = 0; i != salesman.size(); i++) {
 		if (salesman[i].shownum() == num) {
 			Salesman::subsold -= salesman[i].sold;
-			salesman.remove(i);
-			del_flag = 1;
+			del_flag = salesman.remove(i);
 			break;
 		}
 	}

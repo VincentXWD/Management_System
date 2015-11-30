@@ -1,5 +1,3 @@
 ﻿  main.cpp
-  正在生成代码...
-  正在跳过...(未检测到相关更改)
-  employee.cpp
-  Management_System.vcxproj -> C:\Users\Kazakiri\Desktop\cppexer\Management_System\Management_System\Debug\Management_System.exe
+c:\users\kazakiri\desktop\作业\c++\management_system\management_system\management_system\opt.hpp(36): warning C4091: “typedef ”: 没有声明变量时忽略“operate”的左侧
+  Management_System.vcxproj -> C:\Users\Kazakiri\Desktop\作业\C++\Management_System\Management_System\Debug\Management_System.exe

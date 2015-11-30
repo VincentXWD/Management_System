@@ -12,6 +12,8 @@ using namespace std;
 int main() {
 	bool exit_flag = false;
 	int sign;
+	operate opt;
+	opt.init();
 	while (1) {
 		if (exit_flag) {
 			exit(EXIT_SUCCESS);
@@ -20,9 +22,9 @@ int main() {
 		cout << "1：查询，2：添加，3：删除，4：退出" << endl;
 		cin >> sign;
 		switch(sign) {
-		case 1:	quary(); break;
-		case 2:	insert(); break;
-		case 3: remove(); break;
+		case 1:	opt.quary(); break;
+		case 2:	opt.insert(); break;
+		case 3: opt.remove(); break;
 		case 4: exit_flag = 1; break;
 		default: cout << "您的输入有误，请重新输入 ！" << endl; break;
 		}

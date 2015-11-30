@@ -33,6 +33,7 @@ protected:
 typedef class Manager : public employee {	//定义经理类，无关工作时间数，继承于employee
 public:
 	Manager(){};
+	//Manager();
 	Manager(string name, string number) : employee(name, number){}
 	void showsalary();	//显示薪水
 	void input(string, string);	//录入信息
@@ -64,12 +65,12 @@ public:
 	void input(string, string, double);	//录入信息
 	friend void removesam();	//使之可以更新static量
 	Salesman operator = (const Salesman&);
-
+	static double subsold;	//保存部门内推销员的总销售额
+	double getsold() { return sold; }
 protected:
 	const double ratio = 0.04;	//设置推销员月薪与销售额的比率
 	const int level = 4;
 	double sold;	//当月销售额
-	static double subsold;	//保存部门内推销员的总销售额
 }Salesman;
 
 typedef class Salesmanager : public Salesman {	//销售经理类，薪水与时间无关

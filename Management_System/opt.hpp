@@ -1,35 +1,65 @@
 // opt.hpp
 #pragma once
+#include <fstream>
 #include"lib/list"		//数据结构（双向链表）
 #include "employee.h"	//类定义
 
 enum OPT{ HEHE, MNG, TCH, SMG, SAM };
 
-//声明好用来维护四种人的数据结构
-kirai::list<Manager> manager;
-kirai::list<Technician> technician;
-kirai::list<Salesmanager> salesmanager;
-kirai::list<Salesman> salesman;
+typedef class operate {
+public:
+	~operate();
+	int devide();	//确定选择要更新的类
+	void init();	//初始化他们的状态
+	void quary();	//查询
+	void insert();	//添加
+	void remove();	//删除
 
-int devide();	//确定选择要更新的类
-void init();	//初始化他们的状态
-void quary();	//查询
-void insert();	//添加
-void remove();	//删除
+	//插入操作系列
+	void insertmng();
+	void inserttch();
+	void insertsmg();
+	void insertsam();
 
-//插入操作系列
-void insertmng();
-void inserttch();
-void insertsmg();
-void insertsam();
+	//删除操作系列：
+	void removemng();
+	void removetch();
+	void removesmg();
+	void removesam();
 
-//删除操作系列：
-void removemng();
-void removetch();
-void removesmg();
-void removesam();
+protected:
+	//声明好用来维护四种人的数据结构
+	kirai::list<Manager> manager;
+	kirai::list<Technician> technician;
+	kirai::list<Salesmanager> salesmanager;
+	kirai::list<Salesman> salesman;
+};
 
-int devide() {
+////声明好用来维护四种人的数据结构
+//kirai::list<Manager> manager;
+//kirai::list<Technician> technician;
+//kirai::list<Salesmanager> salesmanager;
+//kirai::list<Salesman> salesman;
+//
+//int devide();	//确定选择要更新的类
+//void init();	//初始化他们的状态
+//void quary();	//查询
+//void insert();	//添加
+//void remove();	//删除
+//
+////插入操作系列
+//void insertmng();
+//void inserttch();
+//void insertsmg();
+//void insertsam();
+//
+////删除操作系列：
+//void removemng();
+//void removetch();
+//void removesmg();
+//void removesam();
+
+int operate::devide() {
 	int sign;
 	cout << "请选择您要对哪类人进行操作？" << endl;
 	cout << "1：经理，2：兼职技术人员，3：销售经理，4：兼职推销员。" << endl;
@@ -37,14 +67,59 @@ int devide() {
 	return sign;
 }
 
-void init() {	//初始化他们的状态
+void operate::init() {	//初始化他们的状态
 	manager.clear();
 	technician.clear();
 	salesmanager.clear();
 	salesman.clear();
+	ifstream input_ma("save\\manager.txt");
+	ifstream input_tc("save\\technician.txt");
+	ifstream input_sm("save\\salesmanager.txt");
+	ifstream input_sa("save\\salesman.txt");
+	string name, number;
+	double time;
+	while (input_ma >> name >> number) {
+		manager.push_back(Manager(name, number));
+	}
+	while (input_tc >> name >> number >> time) {
+		technician.push_back(Technician(name, number, time));
+	}
+	while (input_sm >> name >> number) {
+		salesmanager.push_back(Salesmanager(name, number));
+	}
+	while (input_sa >> name >> number) {
+		salesman.push_back(Salesman(name, number));
+	}
+	input_ma.close();
+	input_tc.close();
+	input_sm.close();
+	input_sa.close();
 }
 
-void quary() {	//查询
+operate::~operate() {
+	//ofstream output_ma("save\\manager.txt", ios::out | ios::binary);
+	//ofstream output_tc("save\\technician.txt", ios::out | ios::binary);
+	//ofstream output_sm("save\\salesmanager.txt", ios::out | ios::binary);
+	//ofstream output_sa("save\\salesman.txt", ios::out | ios::binary);
+	//for (int i = 0; i < manager.size(); i++) {
+	//	output_ma << manager[i].shownum() << " ";
+	//}
+	//for (int i = 0; i < technician.size(); i++) {
+
+	//}
+	//for (int i = 0; i < salesmanager.size(); i++) {
+
+	//}
+	//for (int i = 0; i < salesman.size(); i++) {
+
+	//}
+	//output_ma.close();
+	//output_tc.close();
+	//output_sm.close();
+	//output_sa.close();
+}
+
+void operate::quary() {	//查询
 	int sign = devide();
 	switch (sign) {
 	case 1:
@@ -93,7 +168,7 @@ void quary() {	//查询
 	system("pause");
 }
 
-void insert() {	//添加
+void operate::insert() {	//添加
 	int sign = devide();
 	switch (sign) {
 	case MNG:
@@ -113,7 +188,7 @@ void insert() {	//添加
 	system("pause");
 }
 
-void remove() {	//删除
+void operate::remove() {	//删除
 	int sign = devide();
 	switch (sign) {
 	case MNG:
@@ -133,7 +208,7 @@ void remove() {	//删除
 	system("pause");
 }
 
-void insertmng() {
+void operate::insertmng() {
 	string name, num;
 	cout << "请输入要添加的经理的姓名和编号" << endl;
 	cin >> name >> num;
@@ -141,7 +216,7 @@ void insertmng() {
 	manager.push_back(tmp);
 }
 
-void inserttch() {
+void operate::inserttch() {
 	string name, num;
 	double time;
 	cout << "请输入要添加的兼职技术人员的姓名和编号以及工作时长" << endl;
@@ -150,7 +225,7 @@ void inserttch() {
 	technician.push_back(tmp);
 }
 
-void insertsmg() {
+void operate::insertsmg() {
 	string name, num;
 	cout << "请输入要添加的销售经理的姓名和编号" << endl;
 	cin >> name >> num;
@@ -158,7 +233,7 @@ void insertsmg() {
 	salesmanager.push_back(tmp);
 }
 
-void insertsam() {
+void operate::insertsam() {
 	string name, num;
 	double sold;
 	cout << "请输入要添加的兼职推销员的姓名和编号以及当月销售额" << endl;
@@ -167,7 +242,7 @@ void insertsam() {
 	salesman.push_back(tmp);
 }
 
-void removemng() {
+void operate::removemng() {
 	string num;
 	int del_flag = 0;
 	cout << "请输入您要删除的经理的编号" << endl;
@@ -186,7 +261,7 @@ void removemng() {
 	}
 }
 
-void removetch() {
+void operate::removetch() {
 	string num;
 	int del_flag = 0;
 	cout << "请输入您要删除的兼职技术人员的编号" << endl;
@@ -205,7 +280,7 @@ void removetch() {
 	}
 }
 
-void removesmg() {
+void operate::removesmg() {
 	string num;
 	int del_flag = 0;
 	cout << "请输入您要删除的销售经理的编号" << endl;
@@ -224,14 +299,14 @@ void removesmg() {
 	}
 }
 
-void removesam() {
+void operate::removesam() {
 	string num;
 	int del_flag = 0;
 	cout << "请输入您要删除的兼职推销员的编号" << endl;
 	cin >> num;
 	for (int i = 0; i != salesman.size(); i++) {
 		if (salesman[i].shownum() == num) {
-			Salesman::subsold -= salesman[i].sold;
+			Salesman::subsold -= salesman[i].getsold();
 			del_flag = salesman.remove(i);
 			break;
 		}
